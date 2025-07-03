@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* TimeTutor Dark Theme with Aqua Accents */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 165 100% 58%;
+    --accent-foreground: 0 0% 0%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 180 100% 50%;
+
+    --radius: 1rem;
+    
+    /* TimeTutor Custom Variables */
+    --aqua-primary: 180 100% 50%;
+    --aqua-secondary: 165 100% 58%;
+    --aqua-glow: 180 100% 50%;
+    --dark-card: 0 0% 8%;
+    --dark-surface: 0 0% 12%;
+    
+    /* Gradients */
+    --gradient-aqua: linear-gradient(135deg, hsl(var(--aqua-primary)), hsl(var(--aqua-secondary)));
+    --gradient-dark: linear-gradient(135deg, hsl(var(--dark-card)), hsl(var(--dark-surface)));
+    --gradient-glow: linear-gradient(135deg, hsl(var(--aqua-primary) / 0.1), hsl(var(--aqua-secondary) / 0.1));
+    
+    /* Shadows */
+    --shadow-aqua: 0 10px 30px -10px hsl(var(--aqua-primary) / 0.3);
+    --shadow-card: 0 4px 20px -4px hsl(0 0% 0% / 0.4);
+    --shadow-glow: 0 0 40px hsl(var(--aqua-glow) / 0.2);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: all 0.4s ease-in-out;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark mode already active by default */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-aqua {
+    @apply bg-gradient-to-r from-[hsl(var(--aqua-primary))] to-[hsl(var(--aqua-secondary))] 
+           text-black font-medium px-6 py-3 rounded-2xl 
+           hover:shadow-[0_0_20px_hsl(var(--aqua-glow)/0.5)] 
+           transition-all duration-300 hover:scale-105;
+  }
+  
+  .card-dark {
+    @apply bg-[hsl(var(--dark-card))] border-[hsl(var(--border))] 
+           rounded-2xl p-6 shadow-[var(--shadow-card)]
+           hover:shadow-[var(--shadow-glow)] transition-all duration-300;
+  }
+  
+  .input-dark {
+    @apply bg-[hsl(var(--dark-surface))] border-[hsl(var(--border))] 
+           text-foreground placeholder:text-muted-foreground
+           rounded-xl px-4 py-3 focus:border-[hsl(var(--aqua-primary))]
+           focus:ring-2 focus:ring-[hsl(var(--aqua-primary)/0.2)]
+           transition-all duration-200;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-[hsl(var(--aqua-primary))] to-[hsl(var(--aqua-secondary))]
+           bg-clip-text text-transparent;
+  }
+  
+  .glow-text {
+    @apply text-[hsl(var(--aqua-primary))] 
+           [text-shadow:0_0_10px_hsl(var(--aqua-glow)/0.5)];
+  }
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 640px) {
+  /* Mobile Styles */
+  .card-dark {
+    @apply p-4 rounded-xl;
+  }
+  
+  .btn-aqua {
+    @apply px-4 py-2 text-sm rounded-xl;
+  }
+  
+  .input-dark {
+    @apply text-base rounded-lg px-3 py-2;
+  }
+  
+  /* Mobile-specific text sizes */
+  h1 {
+    @apply text-2xl;
+  }
+  
+  h2 {
+    @apply text-xl;
+  }
+  
+  h3 {
+    @apply text-lg;
+  }
+  
+  /* Mobile navigation adjustments */
+  .mobile-nav {
+    @apply flex-col space-y-3;
+  }
+  
+  /* Mobile card grid */
+  .mobile-grid {
+    @apply grid-cols-1 gap-3;
+  }
+  
+  /* Mobile padding */
+  .mobile-container {
+    @apply p-3;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 768px) {
+  /* Tablet Portrait Styles */
+  .card-dark {
+    @apply p-5 rounded-xl;
+  }
+  
+  .tablet-grid {
+    @apply grid-cols-2 gap-4;
+  }
+  
+  .tablet-text {
+    @apply text-base;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Tablet Landscape Styles */
+  .card-dark {
+    @apply p-6 rounded-2xl;
+  }
+  
+  .tablet-lg-grid {
+    @apply grid-cols-3 gap-5;
+  }
+  
+  .tablet-lg-container {
+    @apply max-w-4xl;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  /* Desktop Styles */
+  .desktop-container {
+    @apply max-w-5xl;
+  }
+  
+  .desktop-grid {
+    @apply grid-cols-4 gap-6;
+  }
+  
+  .desktop-card {
+    @apply p-8 rounded-3xl;
+  }
+}
+
+@media (min-width: 1441px) {
+  /* Large Desktop Styles */
+  .large-desktop-container {
+    @apply max-w-6xl;
+  }
+  
+  .large-desktop-text {
+    @apply text-lg;
+  }
+}
+
+/* Landscape orientation adjustments */
+@media (orientation: landscape) and (max-height: 500px) {
+  .landscape-compact {
+    @apply py-2;
+  }
+  
+  .landscape-header {
+    @apply pt-2 pb-3;
+  }
+  
+  .landscape-spacing {
+    @apply space-y-2;
+  }
+}
+
+/* High DPI / Retina display adjustments */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .retina-text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Dark mode specific media queries */
+@media (prefers-color-scheme: dark) {
+  /* Already using dark theme by default */
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .reduced-motion {
+    @apply transition-none animate-none;
+  }
+  
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .print-hidden {
+    @apply hidden;
+  }
+  
+  .print-friendly {
+    @apply text-black bg-white shadow-none;
+  }
+}
+
+/* Hover capability detection */
+@media (hover: hover) {
+  .hover-enabled:hover {
+    @apply transform scale-105;
+  }
+}
+
+@media (hover: none) {
+  .hover-disabled {
+    @apply transform-none;
+  }
+}
